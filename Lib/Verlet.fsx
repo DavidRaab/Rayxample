@@ -166,26 +166,21 @@ module Verlet =
         let br = tl + (vec2 w h)
         quad tl tr bl br
 
-    let ropePoints points =
-        let sticks (a:VerletPoint array) =
-            let ra = ResizeArray()
-            if a.Length <= 1 then
-                ra.ToArray()
-            else
-                for i=0 to a.Length-2 do
-                    ra.Add(stick a.[i] a.[i+1] )
-                ra.ToArray()
-
-        let points = Array.ofSeq points
+    let ropePoints (points:seq<VerletPoint>) =
+        // convert to array if not an array, otherwise keep it
+        let points =
+            match points with
+            | :? array<VerletPoint> as array -> array
+            | seq                            -> Array.ofSeq seq
         {
             Points        = points
-            Sticks        = sticks points
+            Sticks        = Array.init (points.Length - 1) (fun idx -> stick points.[idx] points.[idx+1])
             CollisionMesh = [||]
         }
 
     let rope radius steps (start:Vector2) stop =
         let point  = point radius
-        let moveby = Vector2.Divide(stop - start, (float32 steps + 1f))
+        let moveby = Vec2.dividef (stop - start) (float32 steps + 1f)
         ropePoints [
             yield  point start
             yield! List.init steps (fun i -> point (start + (moveby * (1f + float32 i))))
