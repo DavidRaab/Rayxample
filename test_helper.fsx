@@ -1,6 +1,6 @@
 #!/usr/bin/env -S dotnet fsi
 #load "Lib/Helper.fsx"
-#load "../Lib/Test.fsx"
+#load "Lib/Test.fsx"
 open Helper
 open Test
 

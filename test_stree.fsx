@@ -1,5 +1,5 @@
 #!/usr/bin/env -S dotnet fsi
-#load "../Lib/Test.fsx"
+#load "Lib/Test.fsx"
 #load "Lib/SpatialTree.fsx"
 open System.Numerics
 open SpatialTree
