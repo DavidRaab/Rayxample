@@ -1,7 +1,7 @@
 open System.Numerics
 
 module Vec2 =
-    let create x y = Vector2(x,y)
+    let inline create x y = Vector2(x,y)
 
     let zero  = Vector2.Zero
     let one   = Vector2.One
@@ -15,7 +15,7 @@ module Vec2 =
     let inline distanceSquared p1 p2   = Vector2.DistanceSquared(p1,p2)
     let inline divide  a (b:Vector2)   = Vector2.Divide(a,b)
     let inline dividef a (x:float32)   = Vector2.Divide(a,x)
-    let inline dot a b                 = Vector2.Dot(a,b)
+    let inline dot  a b                = Vector2.Dot(a,b)
     let inline lerp a b t              = Vector2.Lerp(a,b,t)
     let inline max  a b                = Vector2.Max(a,b)
     let inline min  a b                = Vector2.Min(a,b)
@@ -68,3 +68,9 @@ module Vec2 =
         create
             (smoothstep v1.X v2.X t)
             (smoothstep v1.Y v2.Y t)
+
+    /// Calculates angle between two given vectors
+    let angle (v1:Vector2) (v2:Vector2) =
+        let dot = v1.X * v2.X + v1.Y * v2.Y
+        let det = v1.X * v2.Y - v1.Y * v2.X
+        System.MathF.Atan2(det, dot)
