@@ -33,7 +33,7 @@ let drawScreenGrid size width height color =
     for x in 0 .. size .. width  do rl.DrawLine(x, 0, x, height, color)
     for y in 0 .. size .. height do rl.DrawLine(0, y, width, y, color)
 
-rl.InitWindow(width, height, "Hello, World!")
+rl.InitWindow(width, height, "Spatial Tree")
 rl.SetMouseCursor(MouseCursor.Crosshair)
 rl.SetTargetFPS(60)
 while not <| CBool.op_Implicit (rl.WindowShouldClose()) do
